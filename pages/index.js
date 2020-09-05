@@ -8,7 +8,8 @@ export default function Home() {
         <title>Test App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Auto Deploy Works?</h1>
+      <h1>TaskReactor</h1>
+      <h2>Not a todo list. Tasks.</h2>
     </div>
   );
 }
