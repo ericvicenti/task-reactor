@@ -19,6 +19,6 @@ jobs:
           chmod go-rwx /home/runner/.ssh/id_rsa
           echo "host.taskreactor.com,64.227.103.250 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDpAA7Y1FQjlh3B4VFjoEH8x/o7oZwGYTqjUWqdG+Hoxnsrweno0TiUqPCoKs/lD2MvkQex0TfTUpYEIIbvellw=" >> /home/runner/.ssh/known_hosts
       - name: Pull latest on prod server
-        run: ssh root@host.taskreactor.com -t "cd /cloud/tr && git pull"
+        run: ssh root@host.taskreactor.com -t "cd /cloud/tr-production && git pull"
       - name: Run remote deploy script
-        run: ssh root@host.taskreactor.com /cloud/tr/scripts/deploy.sh
+        run: ssh root@host.taskreactor.com /cloud/tr-production/scripts/deploy.sh
