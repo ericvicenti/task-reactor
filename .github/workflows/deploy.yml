@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH to production server
+        shell: bash
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir /home/runner/.ssh
+          echo "$DEPLOY_KEY" | base64 --decode > /home/runner/.ssh/id_rsa
+          chmod go-rwx /home/runner/.ssh/id_rsa
+          echo "host.taskreactor.com,64.227.103.250 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDpAA7Y1FQjlh3B4VFjoEH8x/o7oZwGYTqjUWqdG+Hoxnsrweno0TiUqPCoKs/lD2MvkQex0TfTUpYEIIbvellw=" >> /home/runner/.ssh/known_hosts
+      - name: Pull latest on prod server
+        run: ssh root@host.taskreactor.com -t "cd /cloud/tr && git pull"
+      - name: Run remote deploy script
+        run: ssh root@host.taskreactor.com /cloud/tr/scripts/deploy.sh
