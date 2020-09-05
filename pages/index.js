@@ -8,7 +8,7 @@ export default function Home() {
         <title>Test App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Aven TaskReactor</h1>
+      <h1>Changes Made on Github</h1>
     </div>
   );
 }
